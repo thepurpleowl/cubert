@@ -1,4 +1,4 @@
-# CuBERT
+# CuBERT: stand-alone
 
 
 ## Update 2021/03/04: Clarifications

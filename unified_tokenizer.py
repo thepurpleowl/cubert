@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2022 The Google Research Authors.
+# Copyright 2021 The Google Research Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Cross-language tokenization library."""
 import dataclasses
 import enum
@@ -70,9 +71,6 @@ NEWLINE = quote_special(TokenKind.NEWLINE.name)
 class Position():
   line: int
   column: int
-
-  def __lt__(self, other):
-    return (self.line, self.column) < (other.line, other.column)
 
 
 @dataclasses.dataclass(frozen=True)
@@ -817,6 +815,7 @@ def reconstitute_full_unsanitary_tokens(
   # At this point we have whole tokens that contain sanitized characters. First
   # we'll see if they are dirty, and then unsanitize them into their original
   # form.
+  """
   unsanitary_characters = sanitization_mapping.keys()
   for whole_token in whole_token_list:
     for unsanitary_character in unsanitary_characters:
@@ -824,6 +823,7 @@ def reconstitute_full_unsanitary_tokens(
         raise ValueError('Reconstructed whole token %r seems to contain a '
                          'character %r that should have been sanitized '
                          'already.' % (whole_token, unsanitary_character))
+  """                         
   # Unsanitize.
   unsanitized_whole_tokens = [
       unsanitize(t, sanitization_mapping) for t in whole_token_list
